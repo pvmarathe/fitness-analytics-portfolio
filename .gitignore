@@ -1,0 +1,12 @@
+# Virtual environment - specific to this machine, never share it
+venv/
+
+# Jupyter's autosave/checkpoint folders
+.ipynb_checkpoints/
+
+# Python's compiled bytecode cache
+__pycache__/
+*.pyc
+
+# macOS folder metadata file
+.DS_Store
