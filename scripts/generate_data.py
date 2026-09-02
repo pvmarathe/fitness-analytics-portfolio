@@ -22,25 +22,7 @@ print("End date:", end_date)
 # likely each one is. These numbers are "weights" - bigger number means
 # more likely. They don't need to add up to any particular total.
 WORKOUT_TYPES = ["Rest", "Run", "Walk", "Strength", "Yoga", "Cycling"]
-WORKOUT_WEIGHTS = [30, 20, 20, 15, 10, 5]
-
-# A list to collect one row of data per day. We start empty and add
-# to it as we go through the loop below.
-rows = []
-
-# range(NUM_DAYS) counts 0, 1, 2, ... up to (but not including) 180.
-# We use each number to figure out "which day is this?"
-for day_offset in range(NUM_DAYS):
-    current_date = start_date + timedelta(days=day_offset)
-
-    # random.choices picks ONE item from WORKOUT_TYPES, using
-    # WORKOUT_WEIGHTS to make some choices more likely than others.
-    # It returns a list with one item in it, so we grab that item with [0].
-    workout = random.choices(WORKOUT_TYPES, weights=WORKOUT_WEIGHTS)[0]
-
-    # A dictionary: labeled values, like a single row in a spreadsheet.
-    row = {"date": current_date, "workout_type": workout}
-    rows.append(row)
+WORKOUT_WEIGHTS = [30, 25, 20, 15, 10, 5]
 
 
 def generate_stats(workout_type, day_offset):
@@ -88,10 +70,16 @@ def generate_stats(workout_type, day_offset):
             "calories": calories, "avg_heart_rate": heart_rate}
 
 
-# Rebuild rows, this time including the stats for each workout.
+# Build one row of data per day. A dictionary holds the labeled values
+# for that row (like a single row in a spreadsheet), and we collect all
+# the rows in a list as we go.
 rows = []
 for day_offset in range(NUM_DAYS):
     current_date = start_date + timedelta(days=day_offset)
+
+    # random.choices picks ONE item from WORKOUT_TYPES, using
+    # WORKOUT_WEIGHTS to make some choices more likely than others.
+    # It returns a list with one item in it, so we grab that item with [0].
     workout = random.choices(WORKOUT_TYPES, weights=WORKOUT_WEIGHTS)[0]
     stats = generate_stats(workout, day_offset)
 
